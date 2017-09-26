@@ -4,7 +4,7 @@ xset s off
 xset -dpms
 xset s noblank
 
-unclutter -idle 0.5 &
+unclutter -idle 1 &
 matchbox-window-manager -use_cursor no -use_titlebar no &
 
 chromium-browser --kiosk --incognito --no-first-run --noerrdialogs ~/index.html
