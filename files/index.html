@@ -8,33 +8,52 @@
 			width: 100%; height: 100%;
 			overflow: hidden;
 		}
+		h4 {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			color: red;
+			font-size: 1%;
+		}
 	</style>
 </head>
 <body>
 	<embed id="page" src="https://rpbritton.github.io/kiosk/pages/fhs-kiosk.html" frameborder="0" scrolling="no" width="100%" height="100%" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></embed>
+	<h4 id="notification"></h4>
 </body>
 <script>
 	// All in minutes
 	const timer = {
 		'refresh': 30,
-		'retry': 0.5
+		'retry': 5/60
 	};
 
-	// Auto refresh function
+	// Auto refresh
 	setTimeout(function() {
-		location.reload();
-	}, timer.refresh*60*1000);
-
-	// Refresh if not loaded function
-	var loaded = false;
-	setTimeout(function() {
-		if (!loaded) {
+		if (navigator.onLine) {
 			location.reload();
 		}
-	}, timer.retry*60*1000);
 
-	document.getElementById('page').addEventListener('load', function() {
-		loaded = true;
-	});
+		document.getElementById("notification").innerHTML = "no internet; will refresh";
+
+		setInterval(function() {
+			if (navigator.onLine) {
+				location.reload();
+			}
+		}, timer.retry * 60 * 1000);
+	}, timer.refresh * 60 * 1000);
+
+	// Refresh if not loaded
+	var connected = navigator.onLine;
+
+	if (!connected) {
+		document.getElementById("notification").innerHTML = "no internet";
+	}
+
+	setTimeout(function() {
+		if (!(connected && navigator.onLine)) {
+			location.reload();
+		}
+	}, timer.retry * 60 * 1000);
 </script>
 </html>
