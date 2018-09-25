@@ -9,13 +9,32 @@
 			overflow: hidden;
 		}
 	</style>
-	<script>
-		setInterval(function() {
-			document.getElementById('page').src += '';
-		}, 30*60*1000);
-	</script>
 </head>
 <body>
 	<embed id="page" src="https://rpbritton.github.io/kiosk/pages/fhs-kiosk.html" frameborder="0" scrolling="no" width="100%" height="100%" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></embed>
 </body>
+<script>
+	// All in minutes
+	const timer = {
+		'refresh': 30,
+		'retry': 0.5
+	};
+
+	// Auto refresh function
+	setTimeout(function() {
+		location.reload();
+	}, timer.refresh*60*1000);
+
+	// Refresh if not loaded function
+	var loaded = false;
+	setTimeout(function() {
+		if (!loaded) {
+			location.reload();
+		}
+	}, timer.retry*60*1000);
+
+	document.getElementById('page').addEventListener('load', function() {
+		loaded = true;
+	});
+</script>
 </html>
