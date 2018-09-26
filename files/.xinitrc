@@ -7,13 +7,13 @@ xset s noblank
 unclutter -idle 1 &
 matchbox-window-manager -use_cursor no -use_titlebar no &
 
-#chromium-browser --kiosk --incognito --no-first-run --noerrdialogs ~/index.html
+chromium-browser --kiosk --incognito --no-first-run --noerrdialogs ~/index.html
 
-{
-	sleep 30
-	xdotool key F11
-} &
-firefox-esr ~/index.html
+#{
+#	sleep 30
+#	xdotool key F11
+#} &
+#firefox-esr ~/index.html
 
 # --- Keep cache ---
 #sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
