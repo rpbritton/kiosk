@@ -38,8 +38,9 @@
 	<h4 id="notification"></h4>
 </body>
 <script>
-	// Time to refresh (minutes)
+	// Times (minutes)
 	var refreshTime = 30;
+	var retryTime = 5/60;
 
 	// Returns a promise on successfully contacting my github.
 	function checkOnline() {
@@ -52,7 +53,6 @@
 						resolve();
 					}
 					else {
-
 						reject();
 					}
 				}
@@ -75,7 +75,9 @@
 		checkOnline().then(function() {
 			location.reload();
 		}).catch(function() {
-			tryToReload();
+			setTimeout(function() {
+				tryToReload();
+			}, retryTime * 60 * 1000);
 		});
 	};
 
