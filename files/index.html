@@ -25,22 +25,12 @@
 	// All in minutes
 	const timer = {
 		'refresh': 30,
-		'retry': 5/60
+		'retry': 10/60
 	};
 
 	// Auto refresh
 	setTimeout(function() {
-		if (navigator.onLine) {
-			location.reload();
-		}
-
-		document.getElementById("notification").innerHTML = "no internet; will refresh";
-
-		setInterval(function() {
-			if (navigator.onLine) {
-				location.reload();
-			}
-		}, timer.retry * 60 * 1000);
+		location.reload();
 	}, timer.refresh * 60 * 1000);
 
 	// Refresh if not loaded
